@@ -16,6 +16,7 @@
   touch-action: none;
   min-height: 50px;         /* ✅ 시트 너무 작게 닫히는 현상 방지 */
   overflow: hidden;
+  overscroll-behavior: contain;
 }
 
 .dragHandle {
