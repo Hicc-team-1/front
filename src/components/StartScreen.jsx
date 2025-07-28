@@ -1,8 +1,8 @@
 // StartScreen.jsx
 import React from 'react';
 import styles from './StartScreen.module.css';
-import 시작배경 from './assets/시작배경.png';
-import 홍밥1 from './assets/홍밥1.png';
+import 시작배경 from '../assets/시작배경.png';
+import 홍밥1 from '../assets/홍밥1.png';
 
 export default function StartScreen({ onStart }) {
   return (

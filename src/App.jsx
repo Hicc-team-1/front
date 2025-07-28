@@ -1,9 +1,9 @@
 // App.jsx 완성본: AI 검색 후 ResultScreen으로 전환
 import { useState } from 'react';
-import StartScreen from './StartScreen';
-import SelectScreen from './SelectScreen';
-import AIInputSheet from './AIinputSheet';
-import ResultScreen from './ResultScreen';
+import StartScreen from './components/StartScreen.jsx';
+import SelectScreen from './components/SelectScreen.jsx';
+import AIInputSheet from './components/AIinputSheet.jsx';
+import ResultScreen from './components/ResultScreen.jsx';
 
 function App() {
   const [step, setStep] = useState('start');

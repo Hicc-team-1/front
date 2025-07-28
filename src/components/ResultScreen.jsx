@@ -1,7 +1,7 @@
 import styles from './ResultScreen.module.css';
-import 홍밥1 from './assets/홍밥1.png';
-import 영수증상단 from './assets/영수증상단.png';
-import 영수증하단 from './assets/영수증하단.png';
+import 홍밥1 from '../assets/홍밥1.png';
+import 영수증상단 from '../assets/영수증상단.png';
+import 영수증하단 from '../assets/영수증하단.png';
 
 export default function ResultScreen({ results }) {
   const sampleResults = [
