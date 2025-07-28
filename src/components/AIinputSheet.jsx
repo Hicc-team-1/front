@@ -9,13 +9,19 @@ export default function AIInputSheet({ isOpen, onClose, onSearch }) {
   const [query, setQuery] = useState('');
 
   useEffect(() => {
+    const preventScroll = (e) => e.preventDefault();
     if (isOpen) {
       document.body.style.overflow = 'hidden';
-      setDragHeight(window.innerHeight * 0.1); // 숫자 px로 고정
+      document.addEventListener('touchmove', preventScroll, { passive: false });
     } else {
       document.body.style.overflow = '';
+      document.removeEventListener('touchmove', preventScroll);
     }
+    return () => {
+      document.removeEventListener('touchmove', preventScroll);
+    };
   }, [isOpen]);
+  
 
   const handleStart = (y) => setDragStartY(y);
 
