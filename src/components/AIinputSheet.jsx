@@ -1,6 +1,6 @@
 // AIInputSheet.jsx
 import { useState, useEffect } from 'react';
-import styles from './AIInputSheet.module.css';
+import styles from './AIinputSheet.module.css';
 import 홍밥1 from '../assets/홍밥1.png';
 
 export default function AIInputSheet({ isOpen, onClose, onSearch }) {
