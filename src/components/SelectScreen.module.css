@@ -1,0 +1,148 @@
+.container {
+  background: #ffe5d6;
+  min-height: 100vh;
+  padding: 16px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #d04e41;
+}
+
+.character {
+  width: 48px;
+  height: auto;
+}
+
+.timeBox {
+  position : relative;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 16px;
+  margin: 16px;
+}
+
+.innerBox {
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08), inset 0 -2px 6px rgba(0, 0, 0, 0.03);
+  padding: 24px 20px;
+  margin: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.options {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.optionBtn {
+  padding: 8px 10px;
+  border: 2px solid #d04e41;
+  background: #fff8f4;
+  border-radius: 12px;
+  font-weight: bold;
+  color: #444;
+}
+
+.selected {
+  background-color: #d04e41;
+  color: white;
+}
+
+.sliderGroup {
+  background: #fff8f4;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.sliderLabelWrapper {
+  margin-top: -10px;
+  margin-left: -10px;
+  margin-bottom: 10px;
+}
+
+.sliderLabel {
+  font-weight: bold;
+  color: #2c5f2d;
+  
+}
+
+.timePicker {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* rc-slider 눈금 위치 정렬 */
+:global(.rc-slider-mark) {
+  width: 100%;
+  position: absolute;
+  top: 16px;
+  left: 0;
+}
+
+:global(.rc-slider-mark-text) {
+  font-size: 0.85rem;
+  transform: translateX(-50%);
+  text-align: center;
+  white-space: nowrap;
+}
+
+:global(.rc-slider-mark-text:first-child) {
+  transform: translateX(0%);
+  text-align: left;
+}
+
+:global(.rc-slider-mark-text:last-child) {
+  transform: translateX(-100%);
+  text-align: right;
+}
+
+
+.timePicker select,
+.timePicker input {
+  font-size: 16px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 12px;
+  background: #fff1e5;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  color: #333;
+  width: 60px;
+}
+
+.timePicker input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.timeLabel{
+  font-weight: bold;
+  color: #2c5f2d;
+
+}
+
+.timeLabelWrapper {
+  margin-left:10px;
+  margin-bottom:10px;
+}
+

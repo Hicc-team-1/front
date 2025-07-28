@@ -1,0 +1,128 @@
+.screenWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #3f2a21;
+  padding: 24px;
+  gap: 40px;
+  overflow-y: auto;
+}
+
+.receiptShell {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.receiptEdgeTop,
+.receiptEdgeBottom {
+  width: 100%;
+}
+
+.wrapper {
+  background-color: #f8cba2;
+  width: 99.7%;
+  padding: 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dottedLine {
+  border-top: 2px dotted #6f4e37;
+  border-bottom: 2px dotted #6f4e37;
+  height: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+}
+
+.badge {
+  font-weight: bold;
+  font-size: 14px;
+  color: #3f2a21;
+  margin-left: auto;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.nameBox {
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.mainImage {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.ratingRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.reasonBox,
+.menuList,
+.mapSection {
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.menuItem {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.menuItem img {
+  width: 60px;
+  height: 60px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.menuTitle {
+  font-weight: bold;
+}
+
+.menuTitle span {
+  color: #d04e41;
+  margin-right: 6px;
+}
+
+.menuPrice {
+  font-size: 14px;
+  color: #555;
+}
+
+.mapImage {
+  width: 100%;
+  border-radius: 6px;
+  margin-top: 8px;
+}
