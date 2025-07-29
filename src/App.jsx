@@ -51,6 +51,11 @@ function App() {
     }, 300);
   };
 
+  const handleRestart = () => {
+    setResults(null);      // 🔁 결과 리셋
+    setStep('select');     // 👉 SelectScreen으로 이동
+  };
+
   return (
     <div>
       {step === 'start' && <StartScreen onStart={handleStart} />}
@@ -76,7 +81,7 @@ function App() {
       {step === 'final' && (
         <FinalListScreen
           results={results}
-          onBack={() => setStep('result')}
+          onBack={handleRestart}  // 🔄 변경된 핸들러 연결
         />
       )}
     </div>
