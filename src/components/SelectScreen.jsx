@@ -48,6 +48,7 @@ export default function SelectScreen({ onNext }) {
         <img className={styles.character} src={홍밥1} alt="홍밥이" />
       </div>
 
+      {/* ✅ 식사 시간 선택 */}
       <div className={styles.timeBox}>
         <div className={styles.timeLabelWrapper}>
           <span className={styles.timeLabel}>식사 시간</span>
@@ -61,24 +62,30 @@ export default function SelectScreen({ onNext }) {
             <option value="오전">오전</option>
             <option value="오후">오후</option>
           </select>
-          <input
-            type="number"
-            min="1"
-            max="12"
+
+          <select
             value={hour}
-            onChange={(e) => setHour(Math.min(12, Math.max(1, Number(e.target.value))))}
-          />
-          :
-          <input
-            type="number"
-            min="0"
-            max="59"
+            onChange={(e) => setHour(Number(e.target.value))}
+          >
+            {[...Array(12)].map((_, i) => (
+              <option key={i + 1} value={i + 1}>{i + 1} 시</option>
+            ))}
+          </select>
+
+          <span>:</span>
+
+          <select
             value={minute}
-            onChange={(e) => setMinute(Math.min(59, Math.max(0, Number(e.target.value))))}
-          />
+            onChange={(e) => setMinute(Number(e.target.value))}
+          >
+            {[...Array(60)].map((_, i) => (
+              <option key={i} value={i}>{i} 분</option>
+            ))}
+          </select>
         </div>
       </div>
 
+      {/* ✅ 음식 종류 선택 */}
       <div className={styles.innerBox}>
         <div className={styles.options}>
           {optionsList.map((opt) => (
@@ -93,6 +100,7 @@ export default function SelectScreen({ onNext }) {
           ))}
         </div>
 
+        {/* ✅ 슬라이더 항목 */}
         {[{
           label: '거리', value: distance, setValue: setDistance, marks: distanceMarks, max: 6
         }, {
@@ -120,6 +128,11 @@ export default function SelectScreen({ onNext }) {
           </div>
         ))}
       </div>
+
+      {/* ✅ AI에게 질문하기 버튼 */}
+      <button className={styles.askButton} onClick={handleNext}>
+        AI에게 질문하기
+      </button>
     </div>
   );
 }

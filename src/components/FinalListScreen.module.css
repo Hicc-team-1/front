@@ -16,7 +16,7 @@
     background-color: #f8cba2;       /* 연한 베이지 - 영수증 색상 */
     padding: 24px 20px;
     max-width: 420px;
-    width: 80%;
+    width: 73%;
     box-sizing: border-box;
     border-radius: 0 0 16px 16px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -76,5 +76,5 @@
 
   .again{
     text-align:center;
-    
+
 }
