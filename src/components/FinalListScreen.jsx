@@ -25,10 +25,10 @@ export default function FinalListScreen({ results, onBack }) {
 
         <div className={styles.dottedLine}></div>
         <div className={styles.again}> 마음에 드는 식당을 찾지 못하셨나요? <br/> 다시 한번 찾아볼게요!</div>
-        <img src={홍밥3} className={styles.character} alt="홍밥이" />
         <button className={styles.backBtn} onClick={onBack}>
           🔙 다시 찾기
         </button>
+        <img src={홍밥3} className={styles.character} alt="홍밥이" />
       </div>
     </div>
   );
