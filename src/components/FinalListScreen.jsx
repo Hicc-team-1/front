@@ -8,8 +8,7 @@ export default function FinalListScreen({ results, onBack }) {
       <img src={영수증윗부분} className={styles.receiptTop} alt="영수증 상단" />
 
       <div className={styles.container}>
-        <h2>최종 추천 맛집 리스트</h2>
-
+        
         {results?.map((item, index) => (
           <div key={index} className={styles.item}>
             <h3>{index + 1}. {item.name}</h3>

@@ -1,5 +1,5 @@
 .wrapper {
-    background-color: #3f2414;       /* 진한 갈색 배경 */
+    background-color: #41281f;       /* 진한 갈색 배경 */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -7,33 +7,22 @@
   }
   
   .receiptTop {
-    width: 100%;
+    width: 120%;
     max-width: 420px;
     height: auto;
   }
   
   .container {
+    position: relative;
     background-color: #f8cba2;       /* 연한 베이지 - 영수증 색상 */
     padding: 24px 20px;
     max-width: 420px;
-    width: 73%;
+    width: 66%;
     box-sizing: border-box;
     border-radius: 0 0 16px 16px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     font-family: 'Pretendard', sans-serif;
-  }
-  
-  .container h2 {
-    text-align: center;
-    font-size: 1.2rem;
-    margin-bottom: 16px;
-    border-top: 2px dashed #000;
-    border-bottom: 2px dashed #000;
-    padding: 8px 0;
-  }
-  
-  .item {
-    margin-bottom: 20px;
+    left: -6.3px;
   }
   
   .item h3 {
@@ -68,12 +57,17 @@
   
   .dottedLine {
     width: 100%;
-    max-width: 360px;
-    border-top: 2px dashed #333;
-    margin: 24px auto 16px;
+    height: 8px;
+    background-image:
+    repeating-linear-gradient(to right, #3f2a21 0 4px, transparent 4px 8px),
+    repeating-linear-gradient(to right, #3f2a21 0 4px, transparent 4px 8px);
+    background-size: 100% 2px;
+    background-position: top, bottom;
+    background-repeat: repeat-x;
   }
 
   .again{
+    font-size:14px;
     text-align:center;
     margin-bottom: 10px;
     font-weight : bold;
