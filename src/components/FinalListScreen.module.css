@@ -64,6 +64,7 @@
     background-size: 100% 2px;
     background-position: top, bottom;
     background-repeat: repeat-x;
+    margin-bottom:10px;
   }
 
   .again{
