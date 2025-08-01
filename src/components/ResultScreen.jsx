@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import styles from './ResultScreen.module.css';
 import 홍밥1 from '../assets/홍밥1.png';
 import 홍밥3 from '../assets/홍밥3.png';
+import 홍밥2 from '../assets/홍밥2.png';
 import 영수증상단 from '../assets/영수증상단.png';
 import 영수증하단 from '../assets/영수증하단.png';
 
@@ -104,7 +105,7 @@ export default function ResultScreen({ results, onFinish }) {
                 <strong>대표 메뉴</strong>
                 {data.menus.map((menu, idx) => (
                   <div key={idx} className={styles.menuItem}>
-                    <img src={홍밥1} alt="메뉴 이미지" />
+                    <img src={홍밥2} alt="메뉴 이미지" />
                     <div>
                       <div className={styles.menuTitle}>
                         <span>best</span>
