@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './ResultScreen.module.css';
 import 홍밥1 from '../assets/홍밥1.png';
+import 홍밥3 from '../assets/홍밥3.png';
 import 영수증상단 from '../assets/영수증상단.png';
 import 영수증하단 from '../assets/영수증하단.png';
 
@@ -69,7 +70,7 @@ export default function ResultScreen({ results, onFinish }) {
           <div className={styles.wrapper}>
             <div className={styles.container}>
               <div className={styles.header}>
-                <img src={홍밥1} className={styles.icon} />
+                <img src={홍밥1} className={styles.icon1} />
                 <div className={styles.badge}>홍밥이 선정<br />베스트 밥집 !</div>
               </div>
 
@@ -93,7 +94,11 @@ export default function ResultScreen({ results, onFinish }) {
                 ))}
               </div>
 
-              <div className={styles.dottedLine}></div>
+
+              <div className={styles.lineWithIcon}>
+                <div className={styles.dottedLine}></div>
+                <img src={홍밥3} className={styles.icon2} alt="홍밥이" />
+              </div>
 
               <div className={styles.menuList}>
                 <strong>대표 메뉴</strong>
@@ -115,7 +120,7 @@ export default function ResultScreen({ results, onFinish }) {
               <div className={styles.dottedLine}></div>
 
               <div className={styles.mapSection}>
-                <p>정확한 위치입니다!<br />지도를 누르면 네이버로 연결돼요</p>
+                <strong>정확한 위치입니다!<br />지도를 누르면 네이버로 연결돼요<br/></strong>
                 <img className={styles.mapImage} src={data.map} alt="지도" />
               </div>
             </div>

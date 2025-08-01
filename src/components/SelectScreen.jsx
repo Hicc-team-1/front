@@ -27,20 +27,22 @@ export default function SelectScreen({ onNext }) {
   };
 
   const sliderStyle = {
-    trackStyle: { backgroundColor: '#d04e41' },
+    trackStyle: { backgroundColor: '#e93c2b', height: 3 }, // 바 색상 빨강
     handleStyle: {
-      borderColor: '#d04e41',
-      backgroundColor: '#fff2e9',
+      borderColor: 'black',          // 검은 테두리
+      backgroundColor: '#ffe066',    // 연노랑
       width: 24,
       height: 24,
       marginTop: -10,
-      boxShadow: '0 0 0 2px #d04e41',
+      borderRadius: '50%',           // 원형
+      boxShadow: 'none',
+      opacity: 1,
     },
-    dotStyle: { backgroundColor: '#d04e41', width: 2, height: 12, marginLeft: -1, border: 'none' },
-    activeDotStyle: { backgroundColor: '#d04e41' },
-    railStyle: { backgroundColor: '#f3d5c9', height: 4 },
+    railStyle: { backgroundColor: '#e93c2b', height: 3 },  // 레일도 빨강
+    dotStyle: { backgroundColor: '#e93c2b', width: 2, height: 12, marginLeft: -1, border: 'none' },
+    activeDotStyle: { backgroundColor: '#e93c2b' },
   };
-
+  
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -129,10 +131,7 @@ export default function SelectScreen({ onNext }) {
         ))}
       </div>
 
-      {/* ✅ AI에게 질문하기 버튼 */}
-      <button className={styles.askButton} onClick={handleNext}>
-        AI에게 질문하기
-      </button>
+      
     </div>
   );
 }
