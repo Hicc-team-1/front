@@ -100,40 +100,55 @@ export default function SelectScreen({ onNext }) {
             value: distance,
             setValue: setDistance,
             marks: distanceMarks,
-            max: 6,
-            description: `홍문관으로부터 ${distanceMarks[distance]} 이하`
+            max: 6
           },
           {
             label: '대기시간',
             value: waitTime,
             setValue: setWaitTime,
             marks: waitTimeMarks,
-            max: 6,
-            description: `${waitTimeMarks[waitTime]} 이하`
+            max: 6
           },
           {
             label: '맵기 정도',
             value: spicy,
             setValue: setSpicy,
             marks: spicyMarks,
-            max: 3,
-            description: `${spicyMarks[spicy]}` // ✅ 여기 추가
+            max: 3
           },
           {
             label: '가격',
             value: price,
             setValue: setPrice,
             marks: priceMarks,
-            max: 6,
-            description: `${priceMarks[price]} 이하`
+            max: 6
           }
         ].map((item) => (
           <div key={item.label} className={styles.sliderGroup}>
             <div className={styles.sliderLabelWrapper}>
               <span className={styles.sliderLabel}>{item.label}</span>
-              {item.description && (
-                <span className={styles.sliderLabelRight}>{item.description}</span>
-              )}
+              <span className={styles.sliderLabelRight}>
+                {item.label === '거리' && (
+                  <>
+                    홍문관으로부터 <span className={styles.highlight}>{distanceMarks[distance]}</span> 이하
+                  </>
+                )}
+                {item.label === '대기시간' && (
+                  <>
+                    <span className={styles.highlight}>{waitTimeMarks[waitTime]}</span> 이하
+                  </>
+                )}
+                {item.label === '맵기 정도' && (
+                  <>
+                    <span className={styles.highlight}>{spicyMarks[spicy]}</span>
+                  </>
+                )}
+                {item.label === '가격' && (
+                  <>
+                    <span className={styles.highlight}>{priceMarks[price]}</span> 이하
+                  </>
+                )}
+              </span>
             </div>
             <div style={{ maxWidth: '320px', width: '100%', margin: '0 auto' }}>
               <Slider

@@ -93,8 +93,9 @@
 }
 
 .sliderLabelRight {
-  font-size: 13px;
-  color: #999;
+  font-size: 11px;
+  color: black;
+  margin-right:-10px;
 }
 
 
@@ -182,4 +183,9 @@
   font-size: 1rem;
   font-weight: 500;
   color: #5a3c2e;
+}
+
+.highlight {
+  color: #e93c2b;
+  font-weight: bold;
 }
