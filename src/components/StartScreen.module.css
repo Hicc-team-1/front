@@ -30,8 +30,8 @@
 
 
 .logo {
-  width: 120px;
-  max-width: 30vw;
+  width: 180px;
+  margin-top : 50px;
   height: auto;
 }
 
@@ -51,33 +51,44 @@
   border-radius: 999px;
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1;
 }
 
 .startButton:hover {
   background-color: #2a1e17;
+
 }
 
-.speechBubble {
-  background: #fff;
-  color: #333;
-  padding: 16px 20px;
-  border-radius: 9999px; /* ✅ 완전한 타원형 */
-  font-size: 1rem;
-  font-weight: 600;
-  max-width: 80%;
-  text-align: center;
-  position: relative;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  margin-bottom: 8px;
-  line-height: 1.5;
-}
-.speechBubble::after {
-  content: '';
+.speechBubbleWrapper {
   position: absolute;
-  bottom: -12px;           
-  border-width: 16px 14px 0 14px;  
-  border-style: solid;
-  border-color: #fff transparent transparent transparent;
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.08)); 
+  width: 900px; /* 너비는 필요에 따라 조절 */
+  height: auto;
+  top: -320px;
 }
 
+.speechBubbleImage {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.speechText {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: green;
+  white-space: pre-line;
+}
+
+.appLogo{
+  
+  margin-top:50px;
+  width: 150px;
+  height: auto;
+
+}

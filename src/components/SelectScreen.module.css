@@ -9,12 +9,12 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 16px;
+  margin-top:20px;
 }
 
-.title {
-  font-size: 24px;
-  font-weight: bold;
-  color: #d04e41;
+.logo{
+  width: 50px;
+  height: auto;
 }
 
 .character {

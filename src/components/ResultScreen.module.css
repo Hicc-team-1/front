@@ -180,4 +180,54 @@
   max-width: 420px;
 }
 
+.nameBoxWithBg {
+  position: relative;
+  width: 250px; /* or min(90vw, 320px) */
+  height: auto;
+  margin: 0 auto;
+}
 
+.nameBoxBg {
+  width: 100%;
+  display: block;
+}
+
+.nameText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  color: #fff; /* or 어두운 색상, 배경에 따라 */
+  white-space: nowrap;
+}
+
+.scrollProgressBarWrapper {
+  width: 80%;
+  height: 6px;
+  background-color: #eee;
+  border-radius: 999px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  margin-top : -30px;
+}
+
+.scrollProgressBar {
+  height: 100%;
+  background-color: #d04e41;
+  width: 0%;
+  transition: width 0.2s ease-out;
+}
+
+.scrollTrigger {
+  padding-bottom: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.scrollFixedText{
+  color:white;
+}

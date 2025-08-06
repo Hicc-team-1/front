@@ -3,6 +3,7 @@ import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import styles from './SelectScreen.module.css';
 import 홍밥1 from '../assets/홍밥1.png';
+import 홍밥로고 from '../assets/홍밥로고.png';
 
 const optionsList = ['한식', '일식', '중식', '양식', '기타'];
 const distanceMarks = {1: '100m', 2: '300m', 3: '500m', 4: '700m', 5: '900m', 6: '1km+'};
@@ -46,7 +47,7 @@ export default function SelectScreen({ onNext }) {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <div className={styles.title}>홍밥</div>
+        <img className={styles.logo} src={홍밥로고} alt="홍밥 로고" />
         <img className={styles.character} src={홍밥1} alt="홍밥이" />
       </div>
 

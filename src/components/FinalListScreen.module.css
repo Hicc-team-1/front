@@ -1,5 +1,5 @@
 .wrapper {
-    background-color: #41281f;       /* 진한 갈색 배경 */
+    background-color: #3e2217;       /* 진한 갈색 배경 */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -7,22 +7,22 @@
   }
   
   .receiptTop {
-    width: 120%;
+    margin-top:20px;
+    width: 90%;
     max-width: 420px;
     height: auto;
   }
   
   .container {
     position: relative;
-    background-color: #f8cba2;       /* 연한 베이지 - 영수증 색상 */
+    background-color: #fac99d;       /* 연한 베이지 - 영수증 색상 */
     padding: 24px 20px;
-    max-width: 420px;
-    width: 66%;
+    max-width: 318.5px;
+    width: 68.3%;
     box-sizing: border-box;
-    border-radius: 0 0 16px 16px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     font-family: 'Pretendard', sans-serif;
-    left: -6.3px;
+    left: -1px;
+    top:-2px;
   }
   
   .item h3 {
@@ -64,7 +64,7 @@
     background-size: 100% 2px;
     background-position: top, bottom;
     background-repeat: repeat-x;
-    margin-bottom :20px;
+    margin-bottom :10px;
   }
 
   .again{
@@ -73,4 +73,21 @@
     margin-bottom: 10px;
     font-weight : bold;
 
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700; /* ✅ 글자 굵기만 강조 */
+  text-align: center;
+  margin-bottom: 10px;
+  color: #3d2b1f;
+}
+
+.receiptBottom {
+  position:relative;
+  width: 90%;
+  max-width: 420px;
+  height: auto;
+  margin-top: -3px; /* ✅ 필요 시 붙이기 */
+  left:-1px;
 }

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import styles from './AIinputSheet.module.css';
 import 홍밥1 from '../assets/홍밥1.png';
+import 말풍선 from '../assets/말풍선.png';
 
 export default function AIInputSheet({ isOpen, onClose, onSearch }) {
   const [dragStartY, setDragStartY] = useState(null);
@@ -84,7 +85,12 @@ export default function AIInputSheet({ isOpen, onClose, onSearch }) {
         <div className={styles.content}>
           {dragHeight > window.innerHeight * 0.3 ? (
             <>
-              <div className={styles.speechBubble}>어떤 식당을 찾고 계신가요?</div>
+              <div className={styles.speechBubbleWrapper}>
+                <img src={말풍선} className={styles.speechBubbleImage} alt="말풍선" />
+                <div className={styles.speechText}>
+                  어떤 식당을 찾고 계신가요?
+                </div>
+              </div>
               <img className={styles.logo} src={홍밥1} alt="로고" />
               <input
                 type="text"
