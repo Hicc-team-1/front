@@ -31,7 +31,7 @@
 
 .logo {
   width: 180px;
-  margin-top : 50px;
+  margin-top: -10px;
   height: auto;
 }
 
@@ -51,7 +51,7 @@
   border-radius: 999px;
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+  margin-top: 20px;
 }
 
 .startButton:hover {
@@ -60,29 +60,31 @@
 }
 
 .speechBubbleWrapper {
-  position: absolute;
-  width: 900px; /* 너비는 필요에 따라 조절 */
+  position: relative;
+  width: 300px; /* 너비는 필요에 따라 조절 */
   height: auto;
-  top: -320px;
+  top: 0px;
 }
 
 .speechBubbleImage {
-  width: 100%;
+  width: 75%;
   height: auto;
+  margin: 0 auto;
   display: block;
 }
 
 .speechText {
   position: absolute;
-  top: 48%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.4;
   color: green;
   white-space: pre-line;
+  
 }
 
 .appLogo{
@@ -92,3 +94,4 @@
   height: auto;
 
 }
+

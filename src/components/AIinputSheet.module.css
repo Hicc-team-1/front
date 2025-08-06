@@ -71,31 +71,30 @@
   border-radius: 20px;
   font-size: 1rem;
   cursor: pointer;
-  z-index: 1;
 }
 
 .logo {
-  margin-top: 140px;
+  margin-top: -10px;
   width: 150px;
   max-width: 30vw;
   height: auto;
 }
 
 .speechBubbleWrapper {
-  position: absolute;
-  width: min(900vw, 900px);
-  top : -340px;
+  position: relative;
+  width: 350px;
 }
 
 .speechBubbleImage {
-  width: 100%;
+  width: 60%;
+  margin : 0 auto;
   height: auto;
   display: block;
 }
 
 .speechText {
   position: absolute;
-  top: 48%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 14px;
