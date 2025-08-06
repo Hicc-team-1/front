@@ -6,10 +6,10 @@ import 홍밥1 from '../assets/홍밥1.png';
 import 홍밥로고 from '../assets/홍밥로고.png';
 
 const optionsList = ['한식', '일식', '중식', '양식', '기타'];
-const distanceMarks = {1: '100m', 2: '300m', 3: '500m', 4: '700m', 5: '900m', 6: '1km+'};
-const waitTimeMarks = {1: '10분', 2: '20분', 3: '30분', 4: '40분', 5: '50분', 6: '1시간'};
-const spicyMarks = {1: '1단계', 2: '2단계', 3: '3단계'};
-const priceMarks = {1: '5천원', 2: '1만원', 3: '1만5천원', 4: '2만원', 5: '2만5천원', 6: '3만원+'};
+const distanceMarks = { 1: '100m', 2: '300m', 3: '500m', 4: '700m', 5: '900m', 6: '1km+' };
+const waitTimeMarks = { 1: '10분', 2: '20분', 3: '30분', 4: '40분', 5: '50분', 6: '1시간' };
+const spicyMarks = { 1: '1단계', 2: '2단계', 3: '3단계' };
+const priceMarks = { 1: '5천원', 2: '1만원', 3: '1만5천원', 4: '2만원', 5: '2만5천원', 6: '3만원+' };
 
 export default function SelectScreen({ onNext }) {
   const [selected, setSelected] = useState(null);
@@ -28,22 +28,22 @@ export default function SelectScreen({ onNext }) {
   };
 
   const sliderStyle = {
-    trackStyle: { backgroundColor: '#e93c2b', height: 3 }, // 바 색상 빨강
+    trackStyle: { backgroundColor: '#e93c2b', height: 3 },
     handleStyle: {
-      borderColor: 'black',          // 검은 테두리
-      backgroundColor: '#ffe066',    // 연노랑
+      borderColor: 'black',
+      backgroundColor: '#ffe066',
       width: 24,
       height: 24,
       marginTop: -10,
-      borderRadius: '50%',           // 원형
+      borderRadius: '50%',
       boxShadow: 'none',
       opacity: 1,
     },
-    railStyle: { backgroundColor: '#e93c2b', height: 3 },  // 레일도 빨강
+    railStyle: { backgroundColor: '#e93c2b', height: 3 },
     dotStyle: { backgroundColor: '#e93c2b', width: 2, height: 12, marginLeft: -1, border: 'none' },
     activeDotStyle: { backgroundColor: '#e93c2b' },
   };
-  
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -51,44 +51,34 @@ export default function SelectScreen({ onNext }) {
         <img className={styles.character} src={홍밥1} alt="홍밥이" />
       </div>
 
-      {/* ✅ 식사 시간 선택 */}
+      {/* 식사 시간 선택 */}
       <div className={styles.timeBox}>
         <div className={styles.timeLabelWrapper}>
           <span className={styles.timeLabel}>식사 시간</span>
         </div>
         <div className={styles.timePicker}>
-          <select
-            value={period}
-            onChange={(e) => setPeriod(e.target.value)}
-            style={{ minWidth: '70px' }}
-          >
+          <select value={period} onChange={(e) => setPeriod(e.target.value)} style={{ minWidth: '70px' }}>
             <option value="오전">오전</option>
             <option value="오후">오후</option>
           </select>
 
-          <select
-            value={hour}
-            onChange={(e) => setHour(Number(e.target.value))}
-          >
+          <select value={hour} onChange={(e) => setHour(Number(e.target.value))}>
             {[...Array(12)].map((_, i) => (
-              <option key={i + 1} value={i + 1}>{i + 1} 시</option>
+              <option key={i + 1} value={i + 1}>{i + 1}</option>
             ))}
           </select>
 
           <span>:</span>
 
-          <select
-            value={minute}
-            onChange={(e) => setMinute(Number(e.target.value))}
-          >
+          <select value={minute} onChange={(e) => setMinute(Number(e.target.value))}>
             {[...Array(60)].map((_, i) => (
-              <option key={i} value={i}>{i} 분</option>
+              <option key={i} value={i}>{i}</option>
             ))}
           </select>
         </div>
       </div>
 
-      {/* ✅ 음식 종류 선택 */}
+      {/* 음식 종류 선택 */}
       <div className={styles.innerBox}>
         <div className={styles.options}>
           {optionsList.map((opt) => (
@@ -103,19 +93,47 @@ export default function SelectScreen({ onNext }) {
           ))}
         </div>
 
-        {/* ✅ 슬라이더 항목 */}
-        {[{
-          label: '거리', value: distance, setValue: setDistance, marks: distanceMarks, max: 6
-        }, {
-          label: '대기시간', value: waitTime, setValue: setWaitTime, marks: waitTimeMarks, max: 6
-        }, {
-          label: '맵기 정도', value: spicy, setValue: setSpicy, marks: spicyMarks, max: 3
-        }, {
-          label: '가격', value: price, setValue: setPrice, marks: priceMarks, max: 6
-        }].map((item) => (
+        {/* 슬라이더 그룹 */}
+        {[
+          {
+            label: '거리',
+            value: distance,
+            setValue: setDistance,
+            marks: distanceMarks,
+            max: 6,
+            description: `홍문관으로부터 ${distanceMarks[distance]} 이하`
+          },
+          {
+            label: '대기시간',
+            value: waitTime,
+            setValue: setWaitTime,
+            marks: waitTimeMarks,
+            max: 6,
+            description: `${waitTimeMarks[waitTime]} 이하`
+          },
+          {
+            label: '맵기 정도',
+            value: spicy,
+            setValue: setSpicy,
+            marks: spicyMarks,
+            max: 3,
+            description: `${spicyMarks[spicy]}` // ✅ 여기 추가
+          },
+          {
+            label: '가격',
+            value: price,
+            setValue: setPrice,
+            marks: priceMarks,
+            max: 6,
+            description: `${priceMarks[price]} 이하`
+          }
+        ].map((item) => (
           <div key={item.label} className={styles.sliderGroup}>
             <div className={styles.sliderLabelWrapper}>
               <span className={styles.sliderLabel}>{item.label}</span>
+              {item.description && (
+                <span className={styles.sliderLabelRight}>{item.description}</span>
+              )}
             </div>
             <div style={{ maxWidth: '320px', width: '100%', margin: '0 auto' }}>
               <Slider
@@ -131,8 +149,6 @@ export default function SelectScreen({ onNext }) {
           </div>
         ))}
       </div>
-
-      
     </div>
   );
 }
