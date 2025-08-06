@@ -4,14 +4,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-  
-  .receiptTop {
-    margin-top:20px;
-    width: 90%;
-    max-width: 420px;
-    height: auto;
-  }
+}
+
+.receiptTop {
+  margin-top:20px;
+  width: 90%;
+  max-width: 420px;
+  height: auto;
+}
+
+.innerOffset{
+  transform: translateY(-30px);
+}
   
   .container {
     position: relative;
@@ -22,8 +26,10 @@
     box-sizing: border-box;
     font-family: 'Pretendard', sans-serif;
     left: -1px;
-    top:-2px;
+    top:-3px;
   }
+
+  .inner
   
   .item h3 {
     font-size: 1rem;
@@ -88,6 +94,6 @@
   width: 90%;
   max-width: 420px;
   height: auto;
-  margin-top: -3px; /* ✅ 필요 시 붙이기 */
+  margin-top: -4px; 
   left:-1px;
 }
