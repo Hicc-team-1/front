@@ -50,10 +50,12 @@ export default function AIInputSheet({ isOpen, onClose, onSearch }) {
   return (
     <>
       {isOpen && (
-        <div
-          className={styles.overlay}
-          onClick={onClose} // ⬅️ 배경 클릭 시 닫히게 하고 싶으면 유지
-        ></div>
+        <div className={styles.overlay} onClick={onClose}></div>
+      )}
+
+      {/* ✅ 어두운 배경 dim 처리 (dragHeight가 클 때만 보여짐) */}
+      {dragHeight > window.innerHeight * 0.3 && (
+        <div className={styles.dimmedBackground}></div>
       )}
 
       <div
@@ -87,9 +89,7 @@ export default function AIInputSheet({ isOpen, onClose, onSearch }) {
             <>
               <div className={styles.speechBubbleWrapper}>
                 <img src={말풍선} className={styles.speechBubbleImage} alt="말풍선" />
-                <div className={styles.speechText}>
-                  어떤 식당을 찾고 계신가요?
-                </div>
+                
               </div>
               <img className={styles.logo} src={홍밥1} alt="로고" />
               <input
@@ -113,3 +113,4 @@ export default function AIInputSheet({ isOpen, onClose, onSearch }) {
     </>
   );
 }
+

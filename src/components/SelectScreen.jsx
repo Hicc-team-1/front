@@ -78,7 +78,7 @@ export default function SelectScreen({ onNext }) {
         </div>
       </div>
 
-      {/* 음식 종류 선택 */}
+      {/* 음식 종류 + 슬라이더 */}
       <div className={styles.innerBox}>
         <div className={styles.options}>
           {optionsList.map((opt) => (
@@ -93,7 +93,6 @@ export default function SelectScreen({ onNext }) {
           ))}
         </div>
 
-        {/* 슬라이더 그룹 */}
         {[
           {
             label: '거리',
@@ -150,7 +149,7 @@ export default function SelectScreen({ onNext }) {
                 )}
               </span>
             </div>
-            <div style={{ maxWidth: '320px', width: '100%', margin: '0 auto' }}>
+            <div className={styles.sliderWrapper}>
               <Slider
                 min={1}
                 max={item.max}

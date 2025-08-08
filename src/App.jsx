@@ -55,6 +55,9 @@ function App() {
     setResults(null);      // 🔁 결과 리셋
     setStep('select');     // 👉 SelectScreen으로 이동
   };
+  console.log('step:', step);
+  console.log('isSheetOpen:', isSheetOpen);
+
 
   return (
     <div>
