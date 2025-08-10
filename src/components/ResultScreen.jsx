@@ -39,7 +39,7 @@ export default function ResultScreen({ results, onFinish }) {
       const currentScroll = window.scrollY;
       const start = scrollStart.current ?? currentScroll;
       const diff = currentScroll - start;
-      const scrollThreshold = 60; // 더 길게 당겨야 하게 하려면 값 증가
+      const scrollThreshold = 60;
 
       const percent = Math.min((diff / scrollThreshold) * 100, 100);
       setScrollPercent(percent);
@@ -67,6 +67,9 @@ export default function ResultScreen({ results, onFinish }) {
 
   if (!currentData) return null;
 
+  const isLast = currentIndex === results.length - 1;
+  const nextCta = isLast ? '최종리스트 보러가기' : `${currentIndex + 2}번째 식당 보러가기`;
+
   return (
     <div className={styles.screenWrapper}>
       <div className={styles.receiptShell}>
@@ -76,7 +79,9 @@ export default function ResultScreen({ results, onFinish }) {
           <div className={styles.container}>
             <div className={styles.header}>
               <img src={홍밥1} className={styles.icon1} alt="홍밥이" />
-              <div className={styles.badge}>홍밥이 선정<br />베스트 밥집 !</div>
+              <div className={styles.badge}>
+                홍밥이 선정<br />베스트 밥집 {currentIndex + 1}
+              </div>
             </div>
 
             <div className={styles.dottedLine}></div>
@@ -113,7 +118,6 @@ export default function ResultScreen({ results, onFinish }) {
                   <img src={홍밥2} alt="메뉴 이미지" />
                   <div>
                     <div className={styles.menuTitle}>
-                      <span>best</span>
                       {menu.name}
                     </div>
                     <div className={styles.menuPrice}>{menu.price}</div>
@@ -137,13 +141,15 @@ export default function ResultScreen({ results, onFinish }) {
       {/* 하단 스크롤 유도 영역 */}
       <div className={styles.scrollTrigger} ref={sentinelRef}>
         <img src={영수증상단} className={styles.receiptEdgeTop} alt="영수증 상단 (배너)" />
+        
         <div className={styles.wrapper}>
-        <div className={styles.scrollProgressBarWrapper}>
-          <div
-            className={styles.scrollProgressBar}
-            style={{ width: `${scrollPercent}%` }}
-          />
-        </div>
+          <div className={styles.scrollFixedText}>{nextCta}</div>
+          <div className={styles.scrollProgressBarWrapper}>
+            <div
+              className={styles.scrollProgressBar}
+              style={{ width: `${scrollPercent}%` }}
+            />
+          </div>
         </div>
       </div>
     </div>

@@ -35,29 +35,6 @@
   height: auto;
 }
 
-.title {
-  font-size: 2.2rem;
-  color: #d04e41;
-  font-weight: bold;
-  text-shadow: 1px 1px 0 white;
-}
-
-.startButton {
-  font-size: 1.1rem;
-  padding: 12px 28px;
-  background-color: #3d2b1f;
-  color: white;
-  border: none;
-  border-radius: 999px;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  margin-top: 20px;
-}
-
-.startButton:hover {
-  background-color: #2a1e17;
-
-}
 
 .speechBubbleWrapper {
   position: relative;
@@ -95,3 +72,7 @@
 
 }
 
+.startButtonImage{
+  box-shadow: 0 8px 8px rgba(0,0,0,0.15);
+  border-radius: 20px;
+}

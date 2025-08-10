@@ -112,15 +112,6 @@
   margin-bottom:13px;
 }
 
-
-.timePicker {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  justify-content: center;
-}
-
-
 /* rc-slider 눈금 위치 정렬 */
 :global(.rc-slider-mark) {
   width: 100%;

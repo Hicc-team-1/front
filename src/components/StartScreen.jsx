@@ -5,6 +5,7 @@ import 시작배경 from '../assets/시작배경.png';
 import 홍밥1 from '../assets/홍밥1.png';
 import 홍밥로고 from '../assets/홍밥로고.png';
 import 말풍선1 from '../assets/말풍선1.png';
+import 시작하기 from '../assets/시작하기.png';
 
 export default function StartScreen({ onStart }) {
   return (
@@ -16,15 +17,15 @@ export default function StartScreen({ onStart }) {
       <div className={styles.content}>
         <div className={styles.speechBubbleWrapper}>
           <img src={말풍선1} className={styles.speechBubbleImage} alt="말풍선" />
-          <div className={styles.speechText}>
-          식사 시간마다 <br />식당 고르기 힘드시다구요?<br />홍밥이가 해결해드려요!
-          </div>
         </div>
         <img className={styles.logo} src={홍밥1} alt="로고" />
         <img className={styles.appLogo} src={홍밥로고} alt="홍밥 로고" />
-        <button className={styles.startButton} onClick={onStart}>
-          시작하기
-        </button>
+        <img
+          src={시작하기}
+          alt="시작하기 버튼"
+          className={styles.startButtonImage}
+          onClick={onStart}
+        />
       </div>
     </div>
   );

@@ -86,25 +86,10 @@
 }
 
 .speechBubbleImage {
-  width: 60%;
+  width: 80%;
   margin : 0 auto;
   height: auto;
   display: block;
-}
-
-.speechText {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.5;
-  text-align: center;
-  color: #2d7a00;   /* 원하는 색상 */
-  white-space: pre-line;
-  max-width: 85%;
-  pointer-events: none;
 }
 
 .dimmedBackground {

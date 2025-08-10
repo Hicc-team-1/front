@@ -43,8 +43,8 @@
   width: 100%;
   height: 8px;
   background-image:
-    repeating-linear-gradient(to right, #3f2a21 0 4px, transparent 4px 8px),
-    repeating-linear-gradient(to right, #3f2a21 0 4px, transparent 4px 8px);
+    repeating-linear-gradient(to right, black 0 8px, transparent 2px 12px),
+    repeating-linear-gradient(to right, black 0 8px, transparent 2px 12px);
   background-size: 100% 2px;
   background-position: top, bottom;
   background-repeat: repeat-x;
@@ -54,6 +54,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  
 }
 
 .icon1 {
@@ -97,10 +98,10 @@
 }
 
 .title {
-  font-size: 30px;
+  font-size: 25px;
   font-weight: bold;
   text-align: center;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .nameBox {
@@ -128,7 +129,8 @@
 .reasonBox,
 .menuList,
 .mapSection {
-  padding: 12px;
+  font-size:12px;
+  padding: 8px;
   border-radius: 8px;
 }
 
@@ -147,6 +149,7 @@
 
 .menuTitle {
   font-weight: bold;
+  color : #1d471e ;
 }
 
 .menuTitle span {
@@ -156,7 +159,7 @@
 
 .menuPrice {
   font-size: 14px;
-  color: #555;
+  color: #d62918;
 }
 
 .mapImage {
@@ -209,7 +212,7 @@
   border-radius: 999px;
   margin-bottom: 10px;
   overflow: hidden;
-  margin-top: -30px;
+  
 }
 
 .scrollProgressBar {
@@ -228,5 +231,9 @@
 }
 
 .scrollFixedText {
-  color: white;
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  text-align: center;
+  line-height: 1.3;
 }
