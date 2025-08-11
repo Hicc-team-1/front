@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import styles from './SelectScreen.module.css';
@@ -20,7 +20,7 @@ const sliderConfigBase = [
   { label: '가격', marks: priceMarks, max: 6 },
 ];
 
-export default function SelectScreen({ onNext }) {
+export default function SelectScreen({ onNext, onChange }) {
   const [selected, setSelected] = useState(null);
   const [distance, setDistance] = useState(1);
   const [waitTime, setWaitTime] = useState(3);
@@ -29,6 +29,10 @@ export default function SelectScreen({ onNext }) {
   const [period, setPeriod] = useState('오전');
   const [hour, setHour] = useState(12);
   const [minute, setMinute] = useState(0);
+
+  useEffect(() => {
+     onChange?.({ selected, distance, waitTime, spicy, price, period, hour, minute });
+  }, [selected, distance, waitTime, spicy, price, period, hour, minute, onChange]);
 
   const handleNext = () => {
     if (selected) {

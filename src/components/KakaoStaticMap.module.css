@@ -1,0 +1,10 @@
+.mapContainer {
+    width: 100%;
+    height: 200px;       /* 원하는 고정 높이 */
+    border-radius: 6px;
+    overflow: hidden;
+    display:block;
+    margin:0 auto;
+    margin-top: 8px;
+  }
+  

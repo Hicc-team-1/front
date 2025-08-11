@@ -6,6 +6,7 @@ import 홍밥2 from '../assets/홍밥2.png';
 import 식당제목 from '../assets/식당제목.png';
 import 영수증상단 from '../assets/영수증상단.png';
 import 영수증하단 from '../assets/영수증하단.png';
+import KakaoStaticMap from './KakaoStaticMap';
 
 export default function ResultScreen({ results, onFinish }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -129,8 +130,10 @@ export default function ResultScreen({ results, onFinish }) {
 
             <div className={styles.dottedLine}></div>
             <div className={styles.mapSection}>
-              <strong>정확한 위치입니다!<br />지도를 누르면 네이버로 연결돼요<br /></strong>
-              <img className={styles.mapImage} src={currentData.map} alt="지도" />
+              <strong>정확한 위치입니다!<br />지도를 누르면 카카오 지도가 열려요<br /></strong>
+              <a href={currentData.map} target="_blank" rel="noopener noreferrer" aria-label="카카오 지도 열기">
+                <KakaoStaticMap lat={currentData.lat} lng={currentData.lng} />
+              </a>
             </div>
           </div>
         </div>

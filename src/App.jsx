@@ -18,6 +18,8 @@ const sampleResults = [
       { name: '마제소바', price: '10,300원', desc: '매콤한 일본식 비빔면' },
     ],
     map: 'https://via.placeholder.com/300x200?text=Map',
+    lat: 37.5563,
+    lng: 126.9220,
   },
   {
     name: '홍밥이네',
@@ -29,6 +31,8 @@ const sampleResults = [
       { name: '제육볶음', price: '9,000원', desc: '매콤달콤' },
     ],
     map: 'https://via.placeholder.com/300x200?text=Map2',
+    lat: 37.5585,
+    lng: 126.9250,
   },
 ];
 
@@ -49,6 +53,7 @@ function App() {
   // AIInputSheet에서 "검색하기" 눌렀을 때
   const handleSearch = async (query) => {
     console.log('검색 쿼리:', query);
+    console.log('[SELECT DATA]', selectData); 
 
     // ✅ 의미 있는 값만 담은 payload 생성
     const payload = buildPreferencePayload({ ...selectData, query });
@@ -84,7 +89,10 @@ function App() {
       {step === 'select' && (
         <>
           {/* onNext가 선택값 객체를 넘겨주도록 SelectScreen.jsx에 구현되어 있음 */}
-          <SelectScreen onNext={handleOpenSheet} />
+          <SelectScreen
+            onNext={handleOpenSheet}
+            onChange={setSelectData}         // ✅ 실시간 동기화
+          />
           <AIInputSheet
             isOpen={isSheetOpen}
             onClose={() => setIsSheetOpen(false)}
