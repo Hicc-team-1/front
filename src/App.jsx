@@ -88,7 +88,7 @@ function App() {
 
       {step === 'select' && (
         <>
-          {/* onNext가 선택값 객체를 넘겨주도록 SelectScreen.jsx에 구현되어 있음 */}
+          
           <SelectScreen
             onNext={handleOpenSheet}
             onChange={setSelectData}         // ✅ 실시간 동기화

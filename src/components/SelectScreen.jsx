@@ -21,7 +21,7 @@ const sliderConfigBase = [
 ];
 
 export default function SelectScreen({ onNext, onChange }) {
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState('한식');
   const [distance, setDistance] = useState(1);
   const [waitTime, setWaitTime] = useState(3);
   const [spicy, setSpicy] = useState(1);
