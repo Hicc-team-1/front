@@ -237,3 +237,28 @@
   text-align: center;
   line-height: 1.3;
 }
+
+/* 빈 결과 안내 */
+.emptyWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #3f2a21; /* 기존 배경색과 맞춤 */
+  color: white;
+  text-align: center;
+  gap: 16px;
+  padding: 24px;
+}
+
+.emptyText {
+  font-size: 1.2rem;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+.emptyRestartBtn {
+  width: 160px;
+  cursor: pointer;
+}

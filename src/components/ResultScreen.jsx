@@ -7,8 +7,9 @@ import 식당제목 from '../assets/식당제목.png';
 import 영수증상단 from '../assets/영수증상단.png';
 import 영수증하단 from '../assets/영수증하단.png';
 import KakaoStaticMap from './KakaoStaticMap';
+import 다시하기 from '../assets/다시하기.png';
 
-export default function ResultScreen({ results, onFinish }) {
+export default function ResultScreen({ results, onFinish, onRestart = () => {}  }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [scrollPercent, setScrollPercent] = useState(0);
   const [canTrigger, setCanTrigger] = useState(false);
@@ -66,7 +67,22 @@ export default function ResultScreen({ results, onFinish }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [canTrigger, currentIndex, results.length, onFinish]);
 
-  if (!currentData) return null;
+  if (!currentData) {
+    return (
+      <div className={styles.emptyWrapper}>
+        <div className={styles.emptyText}>
+          조건에 맞는 결과가 없어요 😢<br />
+          조건을 완화해서 다시 시도해 주세요.
+        </div>
+        <img
+          src={다시하기}
+          alt="다시하기 버튼"
+          className={styles.emptyRestartBtn}
+          onClick={onRestart}
+        />
+      </div>
+    );
+  };
 
   const isLast = currentIndex === results.length - 1;
   const nextCta = isLast ? '최종리스트 보러가기' : `${currentIndex + 2}번째 식당 보러가기`;

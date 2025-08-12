@@ -1,10 +1,13 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import StartScreen from './components/StartScreen.jsx';
 import SelectScreen from './components/SelectScreen.jsx';
 import AIInputSheet from './components/AIinputSheet.jsx';
 import ResultScreen from './components/ResultScreen.jsx';
 import FinalListScreen from './components/FinalListScreen.jsx';
 import { buildPreferencePayload } from './api/payload.js';
+import { requestRecommendations } from './api/recommend.js';
+const USE_SAMPLE = import.meta.env.VITE_USE_SAMPLE === 'true';
+
 
 // ✅ 샘플 결과 데이터 (화면 확인용)
 const sampleResults = [
@@ -42,6 +45,10 @@ function App() {
   const [results, setResults] = useState([]);     // 배열로 고정 (안전)
   const [selectData, setSelectData] = useState(null); // SelectScreen에서 받은 선택값 저장
 
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+  const abortRef = useRef(null);
+
   const handleStart = () => setStep('select');
 
   // SelectScreen → 시트 열기 전에 선택값을 App으로 올려둠
@@ -52,29 +59,26 @@ function App() {
 
   // AIInputSheet에서 "검색하기" 눌렀을 때
   const handleSearch = async (query) => {
-    console.log('검색 쿼리:', query);
-    console.log('[SELECT DATA]', selectData); 
-
-    // ✅ 의미 있는 값만 담은 payload 생성
+    if (!selectData) return;
     const payload = buildPreferencePayload({ ...selectData, query });
-    console.log('[SEND PAYLOAD]', payload);  // 서버 준비 전 확인용
-
-    // 서버 준비 후 활성화:
-    // try {
-    //   const res = await fetch('/api/preferences', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify(payload),
-    //   });
-    //   if (!res.ok) throw new Error(`sendPreferences failed: ${res.status}`);
-    // } catch (e) {
-    //   console.error(e);
-    // }
-
-    // ✅ 지금은 샘플 데이터로 결과 화면 확인
-    setResults(sampleResults);
-    setIsSheetOpen(false);
-    setTimeout(() => setStep('result'), 300);
+    console.log('[SEND PAYLOAD]', payload);
+  
+    try {
+      setLoading(true);
+      setErrorMsg('');
+  
+      const data = USE_SAMPLE
+        ? sampleResults
+        : await requestRecommendations(selectData, query, { signal: abortRef.current?.signal });
+  
+      setResults(data);
+      setIsSheetOpen(false);
+      setTimeout(() => setStep('result'), 300);
+    } catch (e) {
+      setErrorMsg(e.message || '검색 중 오류가 발생했어요.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleRestart = () => {
@@ -97,6 +101,7 @@ function App() {
             isOpen={isSheetOpen}
             onClose={() => setIsSheetOpen(false)}
             onSearch={handleSearch}
+            loading={loading}
           />
         </>
       )}
@@ -105,6 +110,10 @@ function App() {
         <ResultScreen
           results={results}
           onFinish={() => setStep('final')}
+          onRestart={() => {
+            setResults([]);
+            setStep('select');
+          }}
         />
       )}
 

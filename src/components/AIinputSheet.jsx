@@ -3,7 +3,7 @@ import styles from './AIinputSheet.module.css';
 import 홍밥1 from '../assets/홍밥1.png';
 import 말풍선 from '../assets/말풍선.png';
 
-export default function AIInputSheet({ isOpen, onClose, onSearch }) {
+export default function AIInputSheet({ isOpen, onClose, onSearch, loading=false }) {
   const [dragStartY, setDragStartY] = useState(null);
   const [dragHeight, setDragHeight] = useState(() => window.innerHeight * 0.1);
   const [isDragging, setIsDragging] = useState(false);
@@ -106,7 +106,7 @@ export default function AIInputSheet({ isOpen, onClose, onSearch }) {
                 aria-label="AI에게 물어보기 입력창"
               />
 
-              <button className={styles.searchButton} onClick={handleSearch}>
+              <button className={styles.searchButton} onClick={handleSearch} disabled={loading}>
                 검색하기
               </button>
             </>
