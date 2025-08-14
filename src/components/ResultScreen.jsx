@@ -2,14 +2,39 @@ import { useEffect, useRef, useState } from 'react';
 import styles from './ResultScreen.module.css';
 import 홍밥1 from '../assets/홍밥1.png';
 import 홍밥3 from '../assets/홍밥3.png';
-import 홍밥2 from '../assets/홍밥2.png';
+// import 홍밥2 from '../assets/홍밥2.png'; // 👋 대표메뉴 제거로 더 이상 사용하지 않음
 import 식당제목 from '../assets/식당제목.png';
 import 영수증상단 from '../assets/영수증상단.png';
 import 영수증하단 from '../assets/영수증하단.png';
 import KakaoStaticMap from './KakaoStaticMap';
 import 다시하기 from '../assets/다시하기.png';
+import StarRating from '../components/StarRating.jsx';
 
-export default function ResultScreen({ results, onFinish, onRestart = () => {}  }) {
+/** (옵션) 구글 Place 사진 1장 로드 훅
+ *  - index.html에 Maps JS + Places 라이브러리 로드되어 있으면 동작
+ *  - 없으면 자동으로 폴백 이미지 사용
+ */
+function usePlaceMainPhoto(placeId, maxWidth = 800) {
+  const [photoUrl, setPhotoUrl] = useState(null);
+
+  useEffect(() => {
+    if (!placeId) return;
+    const g = window.google;
+    if (!g?.maps?.places) return; // 스크립트 미로딩 시 폴백으로 둠
+
+    const svc = new g.maps.places.PlacesService(document.createElement('div'));
+    svc.getDetails({ placeId, fields: ['photos'] }, (place, status) => {
+      if (status !== g.maps.places.PlacesServiceStatus.OK) return;
+      const p = place?.photos?.[0];
+      if (!p) return;
+      setPhotoUrl(p.getUrl({ maxWidth }));
+    });
+  }, [placeId, maxWidth]);
+
+  return photoUrl;
+}
+
+export default function ResultScreen({ results, onFinish, onRestart = () => {} }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [scrollPercent, setScrollPercent] = useState(0);
   const [canTrigger, setCanTrigger] = useState(false);
@@ -18,7 +43,9 @@ export default function ResultScreen({ results, onFinish, onRestart = () => {}  
   const timeoutRef = useRef(null);
 
   const currentData = results?.[currentIndex];
+  const photoUrl = usePlaceMainPhoto(currentData?.googlePlaceId, 800);
 
+  // 하단 감지 시작
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -34,6 +61,7 @@ export default function ResultScreen({ results, onFinish, onRestart = () => {}  
     return () => observer.disconnect();
   }, []);
 
+  // 스크롤 게이지 & 카드 전환
   useEffect(() => {
     if (!canTrigger) return;
 
@@ -41,7 +69,7 @@ export default function ResultScreen({ results, onFinish, onRestart = () => {}  
       const currentScroll = window.scrollY;
       const start = scrollStart.current ?? currentScroll;
       const diff = currentScroll - start;
-      const scrollThreshold = 60;
+      const scrollThreshold = 60; // px
 
       const percent = Math.min((diff / scrollThreshold) * 100, 100);
       setScrollPercent(percent);
@@ -59,7 +87,7 @@ export default function ResultScreen({ results, onFinish, onRestart = () => {}  
           }
           clearTimeout(timeoutRef.current);
           timeoutRef.current = null;
-        }, 1000); // ✅ 게이지 다 차고 1초 후 전환
+        }, 1000); // 게이지 다 차고 1초 후 전환
       }
     };
 
@@ -67,6 +95,7 @@ export default function ResultScreen({ results, onFinish, onRestart = () => {}  
     return () => window.removeEventListener('scroll', handleScroll);
   }, [canTrigger, currentIndex, results.length, onFinish]);
 
+  // 빈 결과
   if (!currentData) {
     return (
       <div className={styles.emptyWrapper}>
@@ -82,7 +111,7 @@ export default function ResultScreen({ results, onFinish, onRestart = () => {}  
         />
       </div>
     );
-  };
+  }
 
   const isLast = currentIndex === results.length - 1;
   const nextCta = isLast ? '최종리스트 보러가기' : `${currentIndex + 2}번째 식당 보러가기`;
@@ -95,6 +124,7 @@ export default function ResultScreen({ results, onFinish, onRestart = () => {}  
         <div className={styles.wrapper}>
           <div className={styles.container}>
             <div className={styles.header}>
+              {/* 좌상단 배지 */}
               <img src={홍밥1} className={styles.icon1} alt="홍밥이" />
               <div className={styles.badge}>
                 홍밥이 선정<br />베스트 밥집 {currentIndex + 1}
@@ -103,24 +133,36 @@ export default function ResultScreen({ results, onFinish, onRestart = () => {}  
 
             <div className={styles.dottedLine}></div>
             <div className={styles.title}>여기 어때요?</div>
+
+            {/* 식당명 */}
             <div className={styles.nameBoxWithBg}>
               <img src={식당제목} className={styles.nameBoxBg} alt="식당 제목 배경" />
               <div className={styles.nameText}>{currentData.name}</div>
             </div>
 
-            <img className={styles.mainImage} src={홍밥1} alt="대표 이미지" />
+            {/* 대표 이미지: 구글 사진 → 폴백 */}
+            <img
+              className={styles.mainImage}
+              src={photoUrl || 홍밥1}
+              alt="대표 이미지"
+            />
 
+            {/* 평점 & 거리 */}
             <div className={styles.ratingRow}>
-              <span className={styles.stars}>{currentData.stars}</span>
-              <span className={styles.distance}>📍 {currentData.distance}</span>
+              <StarRating rating={currentData.rating ?? currentData.stars} />
+              <span className={styles.distance}>📍 {currentData.distance} m</span>
             </div>
 
             <div className={styles.dottedLine}></div>
+
+            {/* 추천 이유 */}
             <div className={styles.reasonBox}>
               <strong>추천 이유는 말이죠!</strong><br />
-              {currentData.reason.split('\n').map((line, i) => (
-                <div key={i}>{line}</div>
-              ))}
+              {String(currentData.reason || '')
+                .split('\n')
+                .map((line, i) => (
+                  <div key={i}>{line}</div>
+                ))}
             </div>
 
             <div className={styles.lineWithIcon}>
@@ -128,28 +170,35 @@ export default function ResultScreen({ results, onFinish, onRestart = () => {}  
               <img src={홍밥3} className={styles.icon2} alt="홍밥이" />
             </div>
 
-            <div className={styles.menuList}>
-              <strong>대표 메뉴</strong>
-              {currentData.menus.map((menu, idx) => (
-                <div key={idx} className={styles.menuItem}>
-                  <img src={홍밥2} alt="메뉴 이미지" />
-                  <div>
-                    <div className={styles.menuTitle}>
-                      {menu.name}
+            {/* ✅ 리뷰(최대 2개), 리뷰자 이름 노출 X */}
+            {currentData.reviews?.length > 0 && (
+              <div className={styles.reviewsBox}>
+                <strong>리뷰</strong>
+                {currentData.reviews.map((rv, idx) => (
+                  <div key={idx} className={styles.reviewItem}>
+                    <div className={styles.reviewHeader}>
+                      <span className={styles.reviewRating}>⭐ {Number(rv.rating ?? 0).toFixed(1)}</span>
+                      {rv.when && <span className={styles.reviewWhen}> · {rv.when}</span>}
                     </div>
-                    <div className={styles.menuPrice}>{menu.price}</div>
-                    <div>{menu.desc}</div>
+                    <div className={styles.reviewText}>{rv.text}</div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
 
             <div className={styles.dottedLine}></div>
+
+            {/* 지도 */}
             <div className={styles.mapSection}>
               <strong>정확한 위치입니다!<br />지도를 누르면 카카오 지도가 열려요<br /></strong>
-              <a href={currentData.map} target="_blank" rel="noopener noreferrer" aria-label="카카오 지도 열기">
-                <KakaoStaticMap lat={currentData.lat} lng={currentData.lng} />
-              </a>
+              <KakaoStaticMap
+                lat={currentData.lat}
+                lng={currentData.lng}
+                level={3}
+                link={currentData.map}  // 같은 탭에서 이 링크로 이동
+              />
+
+              
             </div>
           </div>
         </div>
@@ -160,7 +209,6 @@ export default function ResultScreen({ results, onFinish, onRestart = () => {}  
       {/* 하단 스크롤 유도 영역 */}
       <div className={styles.scrollTrigger} ref={sentinelRef}>
         <img src={영수증상단} className={styles.receiptEdgeTop} alt="영수증 상단 (배너)" />
-        
         <div className={styles.wrapper}>
           <div className={styles.scrollFixedText}>{nextCta}</div>
           <div className={styles.scrollProgressBarWrapper}>

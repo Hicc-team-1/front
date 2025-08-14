@@ -9,15 +9,15 @@ import 홍밥로고 from '../assets/홍밥로고.png';
 const optionsList = ['한식', '일식', '중식', '양식', '기타'];
 const distanceMarks = { 1: '100m', 2: '300m', 3: '500m', 4: '700m', 5: '900m', 6: '1km+' };
 const waitTimeMarks = { 1: '10분', 2: '20분', 3: '30분', 4: '40분', 5: '50분', 6: '1시간' };
-const spicyMarks = { 1: '1단계', 2: '2단계', 3: '3단계' };
+const spicyMarks = { 0: '0단계', 1: '1단계', 2: '2단계', 3: '3단계' };
 const priceMarks = { 1: '5천원', 2: '1만원', 3: '1만5천원', 4: '2만원', 5: '2만5천원', 6: '3만원+' };
 
 // 슬라이더 기본 설정 (state 값과 setValue는 나중에 주입)
 const sliderConfigBase = [
-  { label: '거리', marks: distanceMarks, max: 6 },
-  { label: '대기시간', marks: waitTimeMarks, max: 6 },
-  { label: '맵기 정도', marks: spicyMarks, max: 3 },
-  { label: '가격', marks: priceMarks, max: 6 },
+  { label: '거리', marks: distanceMarks, min : 1, max: 6 },
+  { label: '대기시간', marks: waitTimeMarks, min : 1, max: 6 },
+  { label: '맵기 정도', marks: spicyMarks, min : 0, max: 3 },
+  { label: '가격', marks: priceMarks, min : 1, max: 6 },
 ];
 
 export default function SelectScreen({ onNext, onChange }) {
@@ -116,7 +116,9 @@ export default function SelectScreen({ onNext, onChange }) {
         </div>
 
         {sliderConfigs.map((item) => (
-          <div key={item.label} className={styles.sliderGroup}>
+          <div key={item.label} className={`${styles.sliderGroup} ${
+            item.label === '대기시간' || item.label === '가격' ? styles.disabledOption : ''
+          }`}>
             <div className={styles.sliderLabelWrapper}>
               <span className={styles.sliderLabel}>{item.label}</span>
               <span className={styles.sliderLabelRight}>
@@ -128,7 +130,7 @@ export default function SelectScreen({ onNext, onChange }) {
             </div>
             <div className={styles.sliderWrapper}>
               <Slider
-                min={1}
+                min={item.min}
                 max={item.max}
                 marks={item.marks}
                 step={1}

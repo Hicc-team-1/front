@@ -1,0 +1,16 @@
+.wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 1px;
+    color: #ffb400; /* 별 색상 */
+  }
+  .star {
+    display: inline-block;
+  }
+  .scoreText {
+    color: #5a4638;
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1;
+  }
+  

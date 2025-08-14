@@ -16,21 +16,23 @@ import { buildPreferencePayload } from './payload.js';
  */
 export function normalizeItems(items = []) {
   return items.map((it) => ({
-    name: it.name,
-    stars: `⭐ ${Number(it.stars ?? 0).toFixed(1)}`,
-    distance: it.distance_text ?? '',
+    name: it.name ?? '',
+    rating: Number(it.rating ?? 0),
+    distance: Number(it.distance ?? 0),           // ✅ 숫자(m) 유지
     reason: it.reason ?? '',
-    map: it.map_url,
+    map: it.map ?? '',
     lat: Number(it.lat),
     lng: Number(it.lng),
-    menus: (it.menus || []).map((m) => ({
-      name: m.name,
-      price:
-        typeof m.price === 'number'
-          ? `₩${m.price.toLocaleString()}`
-          : (m.price ?? ''),
-      desc: m.desc ?? '',
-    })),
+    googlePlaceId: it.googlePlaceId ?? null,
+
+    // googleReviews → 이름 제외, 2개만
+    reviews: Array.isArray(it.googleReviews)
+      ? it.googleReviews.slice(0, 2).map(r => ({
+          rating: Number(r.rating ?? 0),
+          when: r.relativeTimeDescription ?? '',
+          text: r.text ?? '',
+        }))
+      : [],
   }));
 }
 

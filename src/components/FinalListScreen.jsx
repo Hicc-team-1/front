@@ -1,3 +1,4 @@
+// FinalListScreen.jsx (수정본)
 import styles from './FinalListScreen.module.css';
 import 영수증윗부분 from '../assets/영수증윗부분.png';
 import 영수증아랫부분 from '../assets/영수증아랫부분.png';
@@ -18,13 +19,16 @@ export default function FinalListScreen({ results, onBack }) {
           {results?.map((item, index) => (
             <div key={index} className={styles.item}>
               <h3>{index + 1}. {item.name}</h3>
-              <ul>
-                {item.menus.map((menu, idx) => (
-                  <li key={idx}>
-                    {menu.name} - {menu.price}
-                  </li>
-                ))}
-              </ul>
+
+              {/* ✅ 메뉴 대신 reason 표시 */}
+              <div className={styles.reasonBox}>
+                <strong>추천 이유</strong>
+                {String(item.reason || '')
+                  .split('\n')
+                  .map((line, i) => <div key={i}>{line}</div>)}
+              </div>
+
+              
             </div>
           ))}
 
@@ -37,6 +41,7 @@ export default function FinalListScreen({ results, onBack }) {
           <img src={홍밥3} className={styles.character} alt="홍밥이" />
         </div>
       </div>
+
       <img src={영수증아랫부분} className={styles.receiptBottom} alt="영수증 하단" />
     </div>
   );

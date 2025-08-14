@@ -10,34 +10,54 @@ const USE_SAMPLE = import.meta.env.VITE_USE_SAMPLE === 'true';
 
 
 // ✅ 샘플 결과 데이터 (화면 확인용)
+// ✅ 샘플 결과 데이터 (화면 확인용)
 const sampleResults = [
   {
     name: '미도인',
-    stars: '★★★★☆',
-    distance: '700m, 약 15분',
+    rating: 4.5,
+    distance: 700, // m
     reason: '맛있고 가성비 좋음\n조건 만족',
-    menus: [
-      { name: '스테이크 덮밥', price: '16,800원', desc: '400g 듬뿍' },
-      { name: '마제소바', price: '10,300원', desc: '매콤한 일본식 비빔면' },
+    googlePlaceId: "ChIJt3ZCOACZfDURJSCI8n1_Tbo",
+    reviews: [
+      {
+        rating: 5,
+        when: '1년 전',
+        text: '국물 진하고 맛있어요. 혼밥하기도 좋아요.'
+      },
+      {
+        rating: 4,
+        when: '2개월 전',
+        text: '양이 많고 가격도 적당합니다.'
+      }
     ],
-    map: 'https://via.placeholder.com/300x200?text=Map',
+    map: 'http://place.map.kakao.com/1850685972',
     lat: 37.5563,
     lng: 126.9220,
   },
   {
-    name: '홍밥이네',
-    stars: '★★★★★',
-    distance: '300m, 약 5분',
+    name: '한식선생 홍대점',
+    rating: 4.8,
+    distance: 300, // m
     reason: '가성비+빠른 대기시간',
-    menus: [
-      { name: '김치찌개', price: '8,000원', desc: '돼지고기 푸짐' },
-      { name: '제육볶음', price: '9,000원', desc: '매콤달콤' },
+    googlePlaceId: 'ChIJyyyyyyyyyyyyyyyyyyy',
+    reviews: [
+      {
+        rating: 5,
+        when: '3주 전',
+        text: '매콤한 제육볶음이 정말 맛있습니다.'
+      },
+      {
+        rating: 4.5,
+        when: '5일 전',
+        text: '김치찌개가 아주 푸짐하고 국물 맛이 좋아요.'
+      }
     ],
-    map: 'https://via.placeholder.com/300x200?text=Map2',
-    lat: 37.5585,
-    lng: 126.9250,
+    map: 'http://place.map.kakao.com/1749518727',
+    lat: 37.5536974225374,
+    lng: 126.925172662023,
   },
 ];
+
 
 function App() {
   const [step, setStep] = useState('start');      // 'start' | 'select' | 'result' | 'final'

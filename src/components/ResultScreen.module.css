@@ -262,3 +262,27 @@
   width: 160px;
   cursor: pointer;
 }
+
+.reviewsBox {
+  display: grid;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.reviewItem {
+  
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.reviewHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.reviewRating { color: #b15b26; }
+.reviewWhen   { color: #8c6e5a; font-weight: 500; }
+.reviewText   { color: #4a2f22; line-height: 1.5; white-space: pre-wrap; }

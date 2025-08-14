@@ -104,3 +104,12 @@
   display: block;    /* 인라인 이미지를 블록 요소로 변경 */
   margin: 0 auto;    /* 좌우 여백을 자동으로 → 수평 가운데 정렬 */
 }
+
+.reasonBox {
+
+  padding: 8px;
+  border-radius: 8px;
+  color: white;
+  line-height: 1.4;
+  margin-bottom: 10px;
+}

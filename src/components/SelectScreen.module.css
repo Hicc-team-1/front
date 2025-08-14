@@ -195,3 +195,8 @@
   color: #e93c2b;
   font-weight: bold;
 }
+
+.disabledOption {
+  opacity: 0.5;          /* 투명도 */
+  pointer-events: none;  /* 마우스/터치 이벤트 막기 */
+}
