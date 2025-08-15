@@ -34,19 +34,20 @@ export default function FinalListScreen({ results, onBack }) {
                 {String(item.reason || '')
                   .split('\n')
                   .map((line, i) => <div key={i}>{line}</div>)}
-              </div>
+              
 
-              {/* 카카오맵 실제 URL 표시 */}
-              {item.map && (
-                <a
-                  href={item.map}
-                  target={isMobile ? undefined : '_blank'}
-                  rel={isMobile ? undefined : 'noopener noreferrer'}
-                  className={styles.kakaoLink}
-                >
-                  {item.map}
-                </a>
-              )}
+                {/* 카카오맵 실제 URL 표시 */}
+                {item.map && (
+                  <a
+                    href={item.map}
+                   target={isMobile ? undefined : '_blank'}
+                   rel={isMobile ? undefined : 'noopener noreferrer'}
+                   className={styles.kakaoLink}
+                  >
+                   {item.map}
+                 </a>
+               )}
+              </div>
             </div>
           ))}
 

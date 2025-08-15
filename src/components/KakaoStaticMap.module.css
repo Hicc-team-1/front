@@ -3,6 +3,7 @@
   width: 100%;
   height: 300px;           /* 필요 시 기존 높이와 동일하게 */
   border-radius: 12px;
+  margin-top:15px;
   overflow: hidden;
 }
 

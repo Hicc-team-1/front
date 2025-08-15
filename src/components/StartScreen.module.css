@@ -66,7 +66,7 @@
 
 .appLogo{
   
-  margin-top:50px;
+  margin-top:0px;
   width: 150px;
   height: auto;
 
@@ -75,4 +75,5 @@
 .startButtonImage{
   box-shadow: 0 8px 8px rgba(0,0,0,0.15);
   border-radius: 20px;
+  margin-top:10px;
 }
