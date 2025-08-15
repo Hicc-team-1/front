@@ -1,24 +1,39 @@
+
+// ✅ 새 버전: Place + fetchFields + Photo.getURI()
 import { useEffect, useState } from 'react';
 
-export default function usePlaceMainPhoto(placeId, maxWidth = 800) {
+export function usePlaceMainPhoto(placeId, maxWidth = 800) {
   const [photoUrl, setPhotoUrl] = useState(null);
-  const [attributions, setAttributions] = useState(null);
 
   useEffect(() => {
-    if (!placeId) return;
-    const g = window.google;
-    if (!g?.maps?.places) return;
+    if (!placeId || !window.google) return;
+    let cancelled = false;
 
-    const svc = new g.maps.places.PlacesService(document.createElement('div'));
-    svc.getDetails({ placeId, fields: ['photos'] }, (place, status) => {
-      if (status !== g.maps.places.PlacesServiceStatus.OK) return;
-      const p = place?.photos?.[0];
-      if (!p) return;
-      setPhotoUrl(p.getUrl({ maxWidth }));
-      // html_attributions는 문자열 배열. 필요 시 UI에 표시
-      setAttributions(p.html_attributions || null);
-    });
+    (async () => {
+      try {
+        // 새 로더 방식: 필요한 순간에 places 라이브러리 로드
+        const { Place } = await google.maps.importLibrary('places');
+
+        // placeId로 Place 인스턴스 생성
+        const place = new Place({ id: placeId });
+
+        // 필요한 필드만 요청 (요금/성능 최적화)
+        await place.fetchFields({ fields: ['photos'] });
+
+        const photo = place.photos?.[0];
+        if (!cancelled && photo) {
+          // 새 API는 getURI 사용 (크기 지정 가능)
+          const uri = photo.getURI({ maxWidth });
+          setPhotoUrl(uri);
+        }
+      } catch (err) {
+        console.error('Place photo fetch failed:', err);
+      }
+    })();
+
+    return () => { cancelled = true; };
   }, [placeId, maxWidth]);
 
-  return { photoUrl, attributions };
+  return photoUrl;
 }
+

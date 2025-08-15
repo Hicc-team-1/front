@@ -7,7 +7,7 @@
   background: white;
   border-radius: 24px 24px 0 0;
   box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.2);
-  z-index: 9999;
+  z-index: 9995;
   transition: height 0.3s ease;
   display: flex;
   flex-direction: column;

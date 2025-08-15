@@ -9,30 +9,26 @@ import 영수증하단 from '../assets/영수증하단.png';
 import KakaoStaticMap from './KakaoStaticMap';
 import 다시하기 from '../assets/다시하기.png';
 import StarRating from '../components/StarRating.jsx';
+import { usePlaceMainPhoto } from '../lib/usePlaceMainPhoto.js'; // ← 업로드한 훅 활용 (경로 기준)
 
-/** (옵션) 구글 Place 사진 1장 로드 훅
- *  - index.html에 Maps JS + Places 라이브러리 로드되어 있으면 동작
- *  - 없으면 자동으로 폴백 이미지 사용
- */
-function usePlaceMainPhoto(placeId, maxWidth = 800) {
-  const [photoUrl, setPhotoUrl] = useState(null);
 
-  useEffect(() => {
-    if (!placeId) return;
-    const g = window.google;
-    if (!g?.maps?.places) return; // 스크립트 미로딩 시 폴백으로 둠
 
-    const svc = new g.maps.places.PlacesService(document.createElement('div'));
-    svc.getDetails({ placeId, fields: ['photos'] }, (place, status) => {
-      if (status !== g.maps.places.PlacesServiceStatus.OK) return;
-      const p = place?.photos?.[0];
-      if (!p) return;
-      setPhotoUrl(p.getUrl({ maxWidth }));
-    });
-  }, [placeId, maxWidth]);
-
-  return photoUrl;
+// ResultScreen.jsx 상단에 추가
+function isMobileUA() {
+  if (typeof navigator === 'undefined') return false;
+  const ua = navigator.userAgent || navigator.vendor || '';
+  return /android/i.test(ua) || /iphone|ipad|ipod/i.test(ua);
 }
+
+const openKakaoMap = (url) => {
+  if (!url) return;
+  if (isMobileUA()) {
+    window.location.href = url;         // 모바일: 같은 탭
+  } else {
+    window.open(url, '_blank', 'noopener,noreferrer'); // 데스크톱: 새 탭
+  }
+};
+
 
 export default function ResultScreen({ results, onFinish, onRestart = () => {} }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -191,15 +187,15 @@ export default function ResultScreen({ results, onFinish, onRestart = () => {} }
             {/* 지도 */}
             <div className={styles.mapSection}>
               <strong>정확한 위치입니다!<br />지도를 누르면 카카오 지도가 열려요<br /></strong>
-              <KakaoStaticMap
-                lat={currentData.lat}
-                lng={currentData.lng}
-                level={3}
-                link={currentData.map}  // 같은 탭에서 이 링크로 이동
-              />
-
-              
+              <div onClick={() => openKakaoMap(currentData.map)} role="button" className={styles.mapClickArea}>
+                <KakaoStaticMap
+                  lat={currentData.lat}
+                  lng={currentData.lng}
+                  level={3}
+                />
+              </div>
             </div>
+
           </div>
         </div>
 

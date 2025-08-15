@@ -106,7 +106,7 @@ export default function AIInputSheet({ isOpen, onClose, onSearch, loading=false 
                 aria-label="AI에게 물어보기 입력창"
               />
 
-              <button className={styles.searchButton} onClick={handleSearch} disabled={loading}>
+              <button className={styles.searchButton} onClick={onSearch} disabled={loading}>
                 검색하기
               </button>
             </>
