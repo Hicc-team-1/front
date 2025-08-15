@@ -1,57 +1,71 @@
 // src/api/recommend.js
-// 추천 API 요청 + 응답 정규화 유틸
-
 import { http } from './client.js';
-import { buildPreferencePayload } from './payload.js';
+import { buildPreferencePayload, toQueryString } from './payload.js';
 
-/**
- * 백엔드 응답 items[] → 화면에서 바로 쓰기 좋은 형태로 변환
- * ResultScreen / FinalListScreen 스키마에 맞춤
- * @param {Array<any>} items
- * @returns {Array<{
- *  name:string, stars:string, distance:string, reason:string,
- *  map:string, lat:number, lng:number,
- *  menus:Array<{name:string, price:string, desc:string}>
- * }>}
- */
+/** (선택) 리뷰 요약용 살짝 트림 */
+const trimText = (t, n = 160) => {
+  if (!t) return '';
+  const s = String(t).replace(/\s+/g, ' ').trim();
+  return s.length > n ? s.slice(0, n) + '…' : s;
+};
+
+/** 백엔드 KakaoPlaceDto 배열 → 화면에서 쓰는 구조로 정규화 */
 export function normalizeItems(items = []) {
   return items.map((it) => ({
+    // 핵심
     name: it.name ?? '',
-    rating: Number(it.rating ?? 0),
-    distance: Number(it.distance ?? 0),           // ✅ 숫자(m) 유지
+    distance: Number(it.distance ?? 0),              // m (숫자)
+    rating: Number(it.googleRating ?? 0),           // 숫자 별점
     reason: it.reason ?? '',
-    map: it.map ?? '',
-    lat: Number(it.lat),
-    lng: Number(it.lng),
+
+    // 위치/링크
+    lat: it.lat != null ? Number(it.lat) : undefined,
+    lng: it.lng != null ? Number(it.lng) : undefined,
+    map: it.mapUrl ?? '',
+
+    // ID
+    kakaoId: it.kakaoId ?? null,
     googlePlaceId: it.googlePlaceId ?? null,
 
-    // googleReviews → 이름 제외, 2개만
+    // 리뷰(최대 2개, 작성자명은 UI에서 미표시)
     reviews: Array.isArray(it.googleReviews)
-      ? it.googleReviews.slice(0, 2).map(r => ({
+      ? it.googleReviews.slice(0, 2).map((r) => ({
           rating: Number(r.rating ?? 0),
           when: r.relativeTimeDescription ?? '',
-          text: r.text ?? '',
+          text: r.text ? trimText(r.text, 220) : '',
         }))
       : [],
+
+    // (옵션) 부가
+    category: it.category ?? '',
+    address: it.address ?? '',
+    openAtRequested: it.openAtRequested ?? null,
+    reviewCount: it.googleReviewCount ?? null,
+    businessStatus: it.googleBusinessStatus ?? '',
+    reasonType: it.reasonType ?? '',
   }));
 }
 
 /**
  * 추천 요청
- * @param {object} selectData - SelectScreen에서 올라온 선택값
- * @param {string} query - AIInputSheet 자연어 질문(없으면 '')
- * @param {{signal?:AbortSignal}} opts
- * @returns {Promise<ReturnType<typeof normalizeItems>>}
+ * @param {object} selectData - SelectScreen 값들 { selected, distance, spicy, period, hour, minute }
+ * @param {string} query - AI 입력 시트 자연어
+ * @param {object} opts - { signal, extraParams } 테스트/디버그용 추가 파라미터 가능
  */
-export async function requestRecommendations(selectData, query = '', { signal } = {}) {
-  const payload = buildPreferencePayload({ ...selectData, query });
-  const data = await http('/api/recommendations', {
-    method: 'POST',
-    body: payload,
-    signal,
-  });
+export async function requestRecommendations(selectData = {}, query = '', { signal, extraParams } = {}) {
+  // 1) 선택값을 백엔드 스펙에 맞는 파라미터로 변환
+  const baseParams = buildPreferencePayload({ ...selectData, query });
 
-  // 방어적 처리: data.items가 없거나 배열이 아니면 빈 배열로
-  const items = Array.isArray(data?.items) ? data.items : [];
-  return normalizeItems(items);
+  // 2) 필요 시 테스트/완화 옵션 추가 (예: excludeUnknownOpen=false 등)
+  const paramsObj = { ...baseParams, ...(extraParams || {}) };
+
+  // 3) GET 쿼리스트링 구성
+  const qs = toQueryString(paramsObj);
+
+  // 4) 호출
+  const res = await http(`/api/places/nearby-genre?${qs}`, { method: 'GET', signal });
+
+  // 5) 응답 정규화
+  const arr = Array.isArray(res?.data) ? res.data : Array.isArray(res) ? res : [];
+  return normalizeItems(arr);
 }

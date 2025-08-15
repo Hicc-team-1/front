@@ -90,6 +90,9 @@ function App() {
       const data = USE_SAMPLE
         ? sampleResults
         : await requestRecommendations(selectData, query, { signal: abortRef.current?.signal });
+
+      
+      console.log('[API RESULTS]', data); // ✅ 실제 최종 데이터 확인
   
       setResults(data);
       setIsSheetOpen(false);
